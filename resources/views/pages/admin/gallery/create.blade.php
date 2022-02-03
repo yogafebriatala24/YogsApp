@@ -7,7 +7,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-center text-gray-800">Tambah Paket Travel</h1>
+            <h1 class="h3 mb-0 text-center text-gray-800">Tambah Gallery</h1>
         </div>
 
         @if ($errors->any())
@@ -23,56 +23,22 @@
 
         <div class="card shadow">
             <div class="card-body">
-                <form action="{{ route('gallery.store') }}" method="post">
+                <form action="{{ route('gallery.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" class="form-control" name="title" placeholder="Title"
-                            value="{{ old('title') }}">
+                        <label for="travel_packages_id">Paket Travel</label>
+                        <select name="travel_packages_id" required class="form-control">
+                            <option value="">Pilih Paket Travel</option>
+                            @foreach ($travel_packages as $travel_package)
+                                <option value="{{ $travel_package->id }}">
+                                    {{ $travel_package->title }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="location">Lokasi</label>
-                        <input type="text" class="form-control" name="location" placeholder="Location"
-                            value="{{ old('location') }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="about">About</label>
-                        <textarea name="about" rows="10" class="d-block w-100 form-control">{{ old('about') }}</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="cagar_budaya">Cagar Budaya</label>
-                        <input type="text" class="form-control" name="cagar_budaya" placeholder="cagar_budaya"
-                            value="{{ old('cagar_budaya') }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="makanan_khas">Makanan Khas</label>
-                        <input type="text" class="form-control" name="makanan_khas" placeholder="makanan_khas"
-                            value="{{ old('makanan_khas') }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="tarian_khas">Tarian Khas</label>
-                        <input type="text" class="form-control" name="tarian_khas" placeholder="tarian_khas"
-                            value="{{ old('tarian_khas') }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="tanggal_keberangkatan">Tanggal Keberangkatan</label>
-                        <input type="date" class="form-control" name="tanggal_keberangkatan"
-                            placeholder="tanggal_keberangkatan" value="{{ old('tanggal_keberangkatan') }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="durasi_wisata">Durasi Wisata</label>
-                        <input type="text" class="form-control" name="durasi_wisata" placeholder="durasi_wisata"
-                            value="{{ old('durasi_wisata') }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="tipe_trip">Tipe Trip</label>
-                        <input type="text" class="form-control" name="tipe_trip" placeholder="tipe_trip"
-                            value="{{ old('tipe_trip') }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="harga">Harga</label>
-                        <input type="number" class="form-control" name="harga" placeholder="harga"
-                            value="{{ old('harga') }}">
+                        <label for="image">Gambar</label>
+                        <input type="file" class="form-control" name="image" placeholder="image">
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">
                         Simpan
