@@ -9,6 +9,8 @@ class TravelPackage extends Model
 {
     use SoftDeletes;
 
+    protected $table = "travel_packages";
+
     protected $fillable = [
         'title', 'slug', 'location', 'about', 'cagar_budaya', 'makanan_khas', 'tarian_khas', 'tanggal_keberangkatan', 'durasi_wisata', 'tipe_trip', 'harga' 
     ];

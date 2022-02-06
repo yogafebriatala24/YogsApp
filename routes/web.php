@@ -25,5 +25,6 @@ Route::prefix('admin') ->namespace('Admin') ->middleware(['auth', 'admin']) ->gr
     Route::get('/', 'DashboardController@index') ->name('dashboard');
     Route::resource('travel-package', 'TravelPackageController');
     Route::resource('gallery', 'GalleryController');
+    Route::resource('transaction', 'TransactionController');
 });
 Auth::routes(['verify' => true]);
