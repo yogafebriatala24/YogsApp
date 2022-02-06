@@ -19,36 +19,26 @@
                 <div class="row">
                     <div class="col-lg-8 pl-lg-0">
                         <div class="card card-details">
-                            <h1>Bromo, Jawa Timur</h1>
-                            <p>Indonesia</p>
-                            <div class="gallery">
-                                <div class="xzoom-container">
-                                    <img src="{{ url('frontend/img/details.jpg') }}" class="xzoom"
-                                        id="xzoom-default" xoriginal="{{ url('frontend/img/details.jpg') }}" />
+                            <h1>{{ $item->title }}</h1>
+                            <p>{{ $item->location }}</p>
+                            @if ($item->galleries->count())
+                                <div class="gallery">
+                                    <div class="xzoom-container">
+                                        <img src="{{ Storage::url($item->galleries->first()->image) }}"
+                                            class="xzoom" id="xzoom-default"
+                                            xoriginal="{{ Storage::url($item->galleries->first()->image) }}" />
+                                    </div>
+                                    <div class="xzoom-thumbs">
+                                        @foreach ($item->galleries as $gallery)
+                                            <a href="{{ Storage::url($gallery->image) }}">
+                                                <img src="{{ Storage::url($gallery->image) }}" class="xzoom-gallery"
+                                                    width="128" xpreview="{{ Storage::url($gallery->image) }}" />
+                                            </a>
+                                        @endforeach
+                                    </div>
                                 </div>
-                                <div class="xzoom-thumbs">
-                                    <a href="{{ url('frontend/img/thumbs1.jpg') }}">
-                                        <img src="{{ url('frontend/img/thumbs1.jpg') }}" class="xzoom-gallery"
-                                            width="128" xpreview="{{ url('frontend/img/thumbs1.jpg') }}" />
-                                    </a>
-                                    <a href="{{ url('frontend/img/thumbs2.jpg') }}">
-                                        <img src="{{ url('frontend/img/thumbs2.jpg') }}" class="xzoom-gallery"
-                                            width="128" xpreview="{{ url('frontend/img/thumbs2.jpg') }}" />
-                                    </a>
-                                    <a href="{{ url('frontend/img/thumbs3.jpg') }}">
-                                        <img src="{{ url('frontend/img/thumbs3.jpg') }}" class="xzoom-gallery"
-                                            width="128" xpreview="{{ url('frontend/img/thumbs3.jpg') }}" />
-                                    </a>
-                                    <a href="{{ url('frontend/img/thumbs4.jpg') }}">
-                                        <img src="{{ url('frontend/img/thumbs4.jpg') }}" class="xzoom-gallery"
-                                            width="128" xpreview="{{ url('frontend/img/thumbs4.jpg') }}" />
-                                    </a>
-                                    <a href="{{ url('frontend/img/thumbs5.jpg') }}">
-                                        <img src="{{ url('frontend/img/thumbs5.jpg') }}" class="xzoom-gallery"
-                                            width="128" xpreview="{{ url('frontend/img/thumbs5.jpg') }}" />
-                                    </a>
-                                </div>
-                            </div>
+                            @endif
+
                             <h2>Tentang Wisata</h2>
                             <p>
                                 Gunung Bromo adalah sebuah gunung berapi aktif di Jawa Timur,
@@ -60,8 +50,7 @@
                             <div class="features row">
                                 <div class="col-md-4">
                                     <div class="description">
-                                        <img src="{{ url('frontend/img/Budaya 1.png') }}" alt=""
-                                            class="features-image" />
+                                        <img src="{{ url('frontend/img/Budaya 1.png') }}" alt="" class="features-image" />
                                         <div class="description">
                                             <h3>Pura Luhur</h3>
                                             <p>Cagar Budaya</p>
