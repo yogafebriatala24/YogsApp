@@ -41,18 +41,14 @@
 
                             <h2>Tentang Wisata</h2>
                             <p>
-                                Gunung Bromo adalah sebuah gunung berapi aktif di Jawa Timur,
-                                Indonesia. Gunung ini memiliki ketinggian 2.329 meter di atas
-                                permukaan laut dan berada dalam empat wilayah kabupaten, yakni
-                                Kabupaten Probolinggo, Kabupaten Pasuruan, Kabupaten Lumajang,
-                                dan Kabupaten Malang.
+                                {!! $item->about !!}
                             </p>
                             <div class="features row">
                                 <div class="col-md-4">
                                     <div class="description">
                                         <img src="{{ url('frontend/img/Budaya 1.png') }}" alt="" class="features-image" />
                                         <div class="description">
-                                            <h3>Pura Luhur</h3>
+                                            <h3>{{ $item->cagar_budaya }}</h3>
                                             <p>Cagar Budaya</p>
                                         </div>
                                     </div>
@@ -61,7 +57,7 @@
                                     <div class="description">
                                         <img src="{{ url('frontend/img/Makanan.png') }}" alt="" class="features-image" />
                                         <div class="description">
-                                            <h3>Nasi Aron</h3>
+                                            <h3>{{ $item->makanan_khas }}</h3>
                                             <p>Makanan Khas</p>
                                         </div>
                                     </div>
@@ -70,7 +66,7 @@
                                     <div class="description">
                                         <img src="{{ url('frontend/img/Tari.png') }}" alt="" class="features-image" />
                                         <div class="description">
-                                            <h3>Tari Ujung</h3>
+                                            <h3>{{ $item->tarian_khas }}</h3>
                                             <p>Tarian Khas</p>
                                         </div>
                                     </div>
@@ -93,26 +89,38 @@
                             <table class="trip-informations">
                                 <tr>
                                     <th width="50%">Tanggal Keberangkatan</th>
-                                    <td width="50%" class="text-right">19 Desember, 2021</td>
+                                    <td width="50%" class="text-right">
+                                        {{ \Carbon\Carbon::create($item->tanggal_keberangkatan)->format('F n, Y') }}</td>
                                 </tr>
                                 <tr>
                                     <th width="50%">Durasi Wisata</th>
-                                    <td width="50%" class="text-right">4 Hari 3 Malam</td>
+                                    <td width="50%" class="text-right">{{ $item->durasi_wisata }}</td>
                                 </tr>
                                 <tr>
                                     <th width="50%">Tipe Trip</th>
-                                    <td width="50%" class="text-right">Open Trip</td>
+                                    <td width="50%" class="text-right">{{ $item->tipe_trip }}</td>
                                 </tr>
                                 <tr>
                                     <th width="50%">Harga</th>
-                                    <td width="50%" class="text-right">$80,00 / Orang</td>
+                                    <td width="50%" class="text-right">${{ $item->harga }},00 / Orang</td>
                                 </tr>
                             </table>
                         </div>
                         <div class="join-container">
-                            <a href="{{ route('checkout') }}" class="btn btn-block btn-join-now mt-3 py-2">
-                                Join Now
-                            </a>
+                            @auth
+                                <form action="{{ route('checkout_process', $item->id) }}" method="post">
+                                    @csrf
+                                    <button class="btn btn-block btn-join-now mt-3 py-2" type="submit">
+                                        Join Now
+                                    </button>
+                                </form>
+                            @endauth
+
+                            @guest
+                                <a href="{{ route('login') }}" class="btn btn-block btn-join-now mt-3 py-2">
+                                    Login or Register to Join
+                                </a>
+                            @endguest
                         </div>
                     </div>
                 </div>
@@ -129,7 +137,7 @@
     <script src="{{ url('frontend/libraries/xzoom/xzoom.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $(".xzoom, xzoom-gallery").xzoom({
+            $(".xzoom, .xzoom-gallery").xzoom({
                 zoomWidth: 100,
                 title: false,
                 tint: "#333",

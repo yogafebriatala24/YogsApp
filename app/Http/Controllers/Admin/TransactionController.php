@@ -62,7 +62,7 @@ class TransactionController extends Controller
         $item = Transaction::with([
             'details', 'travel_package', 'user'
         ])->findOrFail($id);
-        dd($item);
+    
         return view('pages.admin.transaction.detail', [
             'item' => $item
         ]);
